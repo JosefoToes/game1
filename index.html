@@ -1,0 +1,620 @@
+<html>
+<head>
+    <meta charset="UTF-8" lang="es">
+    <title>Jeopardy!</title>
+</head>
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='fonts/fonts1.css' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="estilos.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="http://ricostacruz.com/jquery.transit/jquery.transit.min.js"></script>
+</head>
+<body>
+
+<!--<div id="inicio1" class="centrar">
+<h3>Escribe el número de participantes en el juego, estos pueden ser de dos a cuatro. Después, pulsa el botón Aceptar.
+<br><br>
+<input class="losinputs" type="radio" name="jugadore" value="dosjugadores"><span class="choices">2 jugadores</span><br> 
+<input class="losinputs" type="radio" name="jugadore" value="tresjugadores"><span class="choices">3 jugadores</span><br> 
+<input class="losinputs" type="radio" name="jugadore" value="cuatrojugadores" checked><span class="choices">4 jugadores</span><br>
+<br></h3>
+<div id="aceptar1" class="centrar">Aceptar</div>
+</div>-->
+
+<div id="contentall" class="centrar">
+<div id="floor" class="centrar"><div id="floorimage" class="centrar"></div></div>
+
+<div id="tocaturno" class="centrar">Turno: <span id="tocaturnocolor">rojo</span></div>
+
+<div id="feedbackbuena" class="centrar">
+    ¡Correcto!
+    <audio id="bienaudio"><source src="img/bien.mp3" type="audio/mpeg"></source></audio>
+</div>
+<div id="feedbackmala" class="centrar">
+    ¡Incorrecto!
+    <audio id="malaudio"><source src="img/mal.mp3" type="audio/mpeg"></source></audio>
+</div>
+
+<div id="blockeo" class="centrar"></div>
+<div id="blockeorojo" class="bloqueos"></div>
+<div id="blockeoazul" class="bloqueos"></div>
+<div id="blockeoamarillo" class="bloqueos"></div>
+<div id="blockeoverde" class="bloqueos"></div>
+
+<div id="eltimer" class="centrar"><p><span id="countdowntimer">45 </span></p></div>
+
+<div id="instructionses" class="centrar">
+    <div id="question" class="centrar">?</div>
+    <div id="textinst" class="centrar">Haz clic sobre la tarjeta para ver la pregunta y selecciona la respuesta correcta antes de que se termine el tiempo. Cada jugador responderá por turno. Ganará el primero en alcanzar la cantidad de un millón de pesos, un error y perderás todo lo acumulado.</div>
+</div>
+
+<div id="instrucciones"><!-- --></div>
+<div id="tarjetas" class="centrar">
+    <div class="cards cardshadow centrar"></div>
+    <div class="cards card1 centrar"></div>
+    <div class="cards card2 centrar"></div>
+    <div class="cards card3 centrar"></div>
+    <div class="cards card4 centrar"></div>
+</div>
+
+<div id="contequipos" class="centrar">
+    <div id="eqazul" class="equipos">&nbsp;<br><br>
+        <div id="scoreazul" class="scores">$0</div>
+        <div class="marcador maz" data-val-type="1000000">$1,000,000</div>
+        <div class="marcador maz" data-val-type="800000">$800,000</div>
+        <div class="marcador maz" data-val-type="650000">$650,000</div>
+        <div class="marcador maz" data-val-type="500000">$500,000</div>
+        <div class="marcador maz" data-val-type="300000">$300,000</div>
+        <div class="marcador maz" data-val-type="200000">$200,000</div>
+        <div class="marcador maz" data-val-type="150000">$150,000</div>
+        <div class="marcador maz" data-val-type="100000">$100,000</div>
+        <div class="marcador maz" data-val-type="75000">$75,000</div>
+    </div>
+    <div id="eqrojo" class="equipos">&nbsp;<br><br>
+        <div id="scorerojo" class="scores">$0</div>
+        <div class="marcador mrj" data-val-type="1000000">$1,000,000</div>
+        <div class="marcador mrj" data-val-type="800000">$800,000</div>
+        <div class="marcador mrj" data-val-type="650000">$650,000</div>
+        <div class="marcador mrj" data-val-type="500000">$500,000</div>
+        <div class="marcador mrj" data-val-type="300000">$300,000</div>
+        <div class="marcador mrj" data-val-type="200000">$200,000</div>
+        <div class="marcador mrj" data-val-type="150000">$150,000</div>
+        <div class="marcador mrj" data-val-type="100000">$100,000</div>
+        <div class="marcador mrj" data-val-type="75000">$75,000</div>
+    </div>
+    <div id="eqamarillo" class="equipos">&nbsp;<br><br>
+        <div id="scoreamarillo" class="scores">$0</div>
+        <div class="marcador myw" data-val-type="1000000">$1,000,000</div>
+        <div class="marcador myw" data-val-type="800000">$800,000</div>
+        <div class="marcador myw" data-val-type="650000">$650,000</div>
+        <div class="marcador myw" data-val-type="500000">$500,000</div>
+        <div class="marcador myw" data-val-type="300000">$300,000</div>
+        <div class="marcador myw" data-val-type="200000">$200,000</div>
+        <div class="marcador myw" data-val-type="150000">$150,000</div>
+        <div class="marcador myw" data-val-type="100000">$100,000</div>
+        <div class="marcador myw" data-val-type="75000">$75,000</div>
+    </div>
+    <div id="eqverde" class="equipos">&nbsp;<br><br>
+        <div id="scoreverde" class="scores">$0</div>
+        <div class="marcador mvd" data-val-type="1000000">$1,000,000</div>
+        <div class="marcador mvd" data-val-type="800000">$800,000</div>
+        <div class="marcador mvd" data-val-type="650000">$650,000</div>
+        <div class="marcador mvd" data-val-type="500000">$500,000</div>
+        <div class="marcador mvd" data-val-type="300000">$300,000</div>
+        <div class="marcador mvd" data-val-type="200000">$200,000</div>
+        <div class="marcador mvd" data-val-type="150000">$150,000</div>
+        <div class="marcador mvd" data-val-type="100000">$100,000</div>
+        <div class="marcador mvd" data-val-type="75000">$75,000</div>
+    </div>
+</div>
+
+<div id="pregunta1" class="preguntas centrar"><div class="cerrar">&times;</div>
+Si el saldo al corte aparece con un signo negativo, ¿qué significa?
+<div id="respuestas1a" class="correcta">A) Saldo a favor</div>
+<div id="respuestas1b" class="incorrecta">B) Sobregiro</div>
+<div id="respuestas1c" class="incorrecta">C) Cuenta al corriente</div>
+</div>
+
+<div id="pregunta2" class="preguntas centrar"><div class="cerrar">&times;</div>
+Un cliente llama el 12 de mayo para saber su saldo para no generar intereses, sin embargo, fecha de corte es el 13. ¿A partir de qué día el cliente podrá visualizar correctamente su saldo? 
+<div id="respuestas2a" class="incorrecta">A) El mismo día</div>
+<div id="respuestas2b" class="correcta">B) El día 14</div>
+<div id="respuestas2c" class="incorrecta">C) El día 13</div>
+</div>
+
+<div id="pregunta3" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿Con qué otro nombre se le conoce al saldo al corte?
+<div id="respuestas3a" class="correcta">A) Pago para no generar intereses</div>
+<div id="respuestas3a" class="incorrecta">B) Pago mínimo</div>
+<div id="respuestas3a" class="incorrecta">C) Saldo al día</div>
+</div>
+
+<div id="pregunta4" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿Todas las tarjeta de crédito tienen disponible el retiro de efectivo? 
+<div id="respuestas4a" class="incorrecta">A) Sí</div>
+<div id="respuestas4b" class="correcta">B) No</div>
+</div>
+
+<div id="pregunta5" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿Cuándo se hace el cargo de la primera anualidad en productos sin promoción?
+<div id="respuestas1a" class="correcta">A) Entre el primero y segundo mes después de activarla.</div>
+<div id="respuestas1b" class="incorrecta">B) Entre el primero y segundo mes antes de activarla.</div>
+<div id="respuestas1c" class="incorrecta">C) A y B son correctas.</div>
+</div>
+
+<div id="pregunta6" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿Todas las tarjetas de crédito tienen sucursal de origen?
+<div id="respuestas6a" class="correcta">A) Sí</div>
+<div id="respuestas6b" class="incorrecta">B) No</div>
+</div>
+
+<div id="pregunta7" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿Cuál es la tarjeta de crédito de Banorte que es dirigida a las mujeres?
+<div id="respuestas7a" class="incorrecta">A) T40</div>
+<div id="respuestas7b" class="incorrecta">B) La Comer</div>
+<div id="respuestas7c" class="correcta">C) Mujer Banorte</div>
+</div>
+
+<div id="pregunta8" class="preguntas centrar"><div class="cerrar">&times;</div>
+Para que el cliente evite al menos los cargos de cobranza, ¿qué cantidad tendría que pagar en su fecha de pago?
+<div id="respuestas8a" class="correcta">A) Pago mínimo</div>
+<div id="respuestas8b" class="incorrecta">B) Saldo al corte</div>
+<div id="respuestas8c" class="incorrecta">C) A y B son correctas</div>
+</div>
+
+<div id="pregunta9" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿En dónde puedes consultar la fecha del cargo de anualidad en el software Vision?
+<div id="respuestas9a" class="correcta">A) ARIQ 02 y ARQB 08</div>
+<div id="respuestas9b" class="incorrecta">B) ARIQ 02 y ARQN 01</div>
+<div id="respuestas9c" class="incorrecta">C) ARQB 08 y ARIQ 08</div>
+</div>
+
+<div id="pregunta10" class="preguntas centrar"><div class="cerrar">&times;</div>
+Es una campaña que tiene como finalidad ofrecer a clientes Banorte una tarjeta de crédito Clásica, Oro y Mujer Banorte preaprobada sin que el cliente acuda a sucursal para solicitarla. 
+<div id="respuestas10a" class="incorrecta">A) “Rapido y fácil”</div>
+<div id="respuestas10b" class="correcta">B) “Así de Fácil”</div>
+<div id="respuestas10c" class="incorrecta">C) Sin salir de casa </div>
+</div>
+
+<div id="pregunta11" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿En qué pantalla del software Vision puedes ubicar el límite de crédito del titular?
+<div id="respuestas11a" class="incorrecta">A) ARQB 08</div>
+<div id="respuestas11b" class="incorrecta">B) ARIQ 02</div>
+<div id="respuestas11c" class="correcta">C) ARIQ (01)</div>
+</div>
+
+<div id="pregunta12" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿Cuáles son las tarjetas de crédito promocionales para estaciones de radio?
+<div id="respuestas12a" class="correcta">A) T40 y Wradio</div>
+<div id="respuestas12b" class="incorrecta">B) T40 y Radio Regio</div>
+<div id="respuestas12c" class="incorrecta">C) Wradio y Alfa Radio</div>
+</div>
+
+<div id="pregunta13" class="preguntas centrar"><div class="cerrar">&times;</div>
+Un cliente llama molesto para reclamar que su fecha de pago se adelantó y se le generaron gastos de cobranza e intereses. El cliente alega que su fecha de pago siempre son los días 1 de cada mes; sin embargo, por esta ocasión, su fecha cayó en domingo. ¿Qué información debieron haberle dado al cliente al otorgarle su tarjeta de crédito?
+<div id="respuestas13a" class="incorrecta">A) Si la fecha de corte cae en día inhábil, se adelantará al día hábil anterior a la fecha de corte.</div>
+<div id="respuestas13b" class="correcta">B) Si la fecha de pago cae en día inhabil, se pasa al siguiente día hábil.</div>
+<div id="respuestas13c" class="incorrecta">C) Si la fecha de pago cae en día inhábil, se adelantará al día hábil anterior a la fecha de corte.</div>
+</div>
+
+<div id="pregunta14" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿En qué sistema podemos validar si el cliente se encuentra en Despacho de Cobranza o área de Cobranza CC? 
+<div id="respuestas14a" class="incorrecta">A) Buró de crédito</div>
+<div id="respuestas14b" class="correcta">B) Banca de consumo</div>
+<div id="respuestas14c" class="incorrecta">C) Clientes deudores</div>
+</div>
+
+<div id="pregunta15" class="preguntas centrar"><div class="cerrar">&times;</div>
+Son cargos que se generan por pagar el mínimo o saldo al corte antes de su fecha límite de pago:
+<div id="respuestas15a" class="correcta">A) Gastos de cobranza</div>
+<div id="respuestas15b" class="incorrecta">B) Intereses moratorios</div>
+<div id="respuestas15c" class="incorrecta">C) Gastos morosos </div>
+</div>
+
+<div id="pregunta16" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿Con qué bloqueo podemos identificar si la cuenta tiene dos pagos vencidos?
+<div id="respuestas16a" class="incorrecta">A) Bloqueo C</div>
+<div id="respuestas16b" class="incorrecta">B) Bloqueo D</div>
+<div id="respuestas16c" class="correcta">C) Bloqueo E</div>
+</div>
+
+<div id="pregunta17" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿Cuál es el bloqueo de cobranza en el cual se puede reponer la tarjeta de crédito si el pago mínimo se encuentra cubierto? 
+<div id="respuestas17a" class="correcta">A) Bloqueo C</div>
+<div id="respuestas17b" class="incorrecta">B) Bloqueo D</div>
+<div id="respuestas17c" class="incorrecta">C) Bloqueo E</div>
+</div>
+
+<div id="pregunta18" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿Por qué motivo se puede disminuir la línea de crédito?
+<div id="respuestas18a" class="incorrecta">A) No se puede disminuir</div>
+<div id="respuestas18b" class="correcta">B) Petición del cliente o estrategia</div>
+<div id="respuestas18c" class="incorrecta">C) Tener tres pagos vencidos</div>
+</div>
+
+<div id="pregunta19" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿Qué procedimiento se deberán explicar al cliente para identificar los intereses que se le están generando en su estado de cuenta?
+<div id="respuestas19a" class="correcta">A) Saldos promedio por compras y disposiciones y el del saldo promedio por el saldo anterior a la fecha de cálculo de los intereses.</div>
+<div id="respuestas19b" class="incorrecta">B) Reporte de cálculo.</div>
+<div id="respuestas19c" class="incorrecta">C) A y B son correctas.</div>
+</div>
+
+<div id="pregunta20" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿En qué sistema se puede localizar o agilizar la tarjeta de crédito? 
+<div id="respuestas20a" class="incorrecta">A) Localizador TDC</div>
+<div id="respuestas20b" class="incorrecta">B) Vision</div>
+<div id="respuestas20c" class="correcta">C) SIAM</div>
+</div>
+
+<div id="pregunta21" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿Cuál es el monto autorizado para retiros de efectivo en cajeros ATM?
+<div id="respuestas21a" class="correcta">A) $6,500.00</div>
+<div id="respuestas21b" class="incorrecta">B) 1,500 UDIS</div>
+<div id="respuestas21c" class="incorrecta">C) $7,500.00</div>
+</div>
+
+<div id="pregunta22" class="preguntas centrar"><div class="cerrar">&times;</div>
+Es un programa que permite congelar el saldo deudor de la tarjeta de crédito con la opción de diferir la deuda desde 3 hasta 36 meses con una tasa de interés preferencial:
+<div id="respuestas22a" class="incorrecta">A) Poco a poco </div>
+<div id="respuestas22b" class="correcta">B) Plan de Pagos Fijos</div>
+<div id="respuestas22c" class="incorrecta">C) Meses congelados</div>
+</div>
+
+<div id="pregunta23" class="preguntas centrar"><div class="cerrar">&times;</div>
+En la plataforma Vision ¿con qué letra se puede identificar si un cliente hizo alguna compra con su tarjeta de crédito?
+<div id="respuestas23a" class="correcta">A) Cargo: D</div>
+<div id="respuestas23b" class="incorrecta">B) Abono: C</div>
+<div id="respuestas23c" class="incorrecta">C) Movimiento informativo: M</div>
+</div>
+
+<div id="pregunta24" class="preguntas centrar"><div class="cerrar">&times;</div>
+Son ejemplos de corresponsalías en las cuales se puede realizar el pago de la tarjeta de crédito:
+<div id="respuestas24a" class="incorrecta">A) Liverpool, SEARS, Palacio de Hierro.</div>
+<div id="respuestas24b" class="incorrecta">B) Samborns, OXXO, Chedraui.</div>
+<div id="respuestas24c" class="correcta">C) 7Eleven, OXXO, Farmacias del Ahorro.</div>
+</div>
+
+<div id="pregunta25" class="preguntas centrar"><div class="cerrar">&times;</div>
+La señorita Anaís pagó su tarjeta de crédito en un OXXO después de las 8:00 p.m. Su fecha de límite de pago es ese mismo día. ¿Se generaría intereses y gastos de cobranza? ¿Por qué? 
+<div id="respuestas25a" class="incorrecta">A) No, el pago se registra en instante en el que se hace. </div>
+<div id="respuestas25b" class="correcta">B) Sí, porque todos los pagos realizados después de las 6:00 p.m. se ven reflejados hasta el siguiente día hábil.</div>
+<div id="respuestas25c" class="incorrecta">C) Sí, los pagos en tienas OXXO se registran 48 horas después. </div>
+</div>
+
+<div id="pregunta26" class="preguntas centrar"><div class="cerrar">&times;</div>
+Si el cliente realiza un pago de tarjeta de crédito en otro banco; ¿cuánto es el tiempo máximo para que se refleje en su cuenta Banorte?
+<div id="respuestas26a" class="incorrecta">A) 24 horas</div>
+<div id="respuestas26b" class="incorrecta">B) 48 horas</div>
+<div id="respuestas26c" class="correcta">C) 72 horas</div>
+</div>
+
+<div id="pregunta27" class="preguntas centrar"><div class="cerrar">&times;</div>
+Una cliente solicitó en sucursal una tarjeta de crédito Mujer Banorte, se comunica a las 07:00 a.m. para activarla ¿A qué extensión se transfieres?
+<div id="respuestas27a" class="incorrecta">A) 3739</div>
+<div id="respuestas27b" class="incorrecta">B) 5025</div>
+<div id="respuestas27c" class="correcta">C) No lo transfieres, el servicio lo brindas tú.</div>
+</div>
+
+<div id="pregunta28" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿En qué tiempo llega la reposición de una tarjeta de crédito al domicilio registrado por el cliente? 
+<div id="respuestas28a" class="correcta">A) 12 días hábiles</div>
+<div id="respuestas28b" class="incorrecta">B) 2 días hábiles + 10 naturales</div>
+<div id="respuestas28c" class="incorrecta">C) 12 días naturales</div>
+</div>
+
+<div id="pregunta29" class="preguntas centrar"><div class="cerrar">&times;</div>
+Si el cliente desea agilizar su tarjeta de crédito a una sucursal Banorte, ¿en qué base de datos se debe validar si la sucursal deseada está autorizada para la agilización?
+<div id="respuestas29a" class="incorrecta">A) Todas las sucursales están autorizadas para agilización de plásticos. </div>
+<div id="respuestas29b" class="correcta">B) Directorio sucursales autorizadas para agilización de plásticos.</div>
+<div id="respuestas29c" class="incorrecta">C) Base de datos sucursales nacionales.</div>
+</div>
+
+<div id="pregunta30" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿Cuántos días tarda en llegar una tarjeta de crédito que se agiliza por medio de SIAM a una sucursal Banorte? 
+<div id="respuestas30a" class="incorrecta">A) 7 días naturales</div>
+<div id="respuestas30b" class="incorrecta">B) 5 días hábiles</div>
+<div id="respuestas30c" class="correcta">C) 10 días naturales</div>
+</div>
+
+<div id="pregunta31" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿Cuál es el tiempo máximo en el que se genera el estado de cuenta de una tarjeta de crédito?
+<div id="respuestas31a" class="correcta">A) 3 días hábiles después de la fecha de corte.</div>
+<div id="respuestas31b" class="incorrecta">B) 15 días hábiles después de la fecha de corte.</div>
+<div id="respuestas31c" class="incorrecta">C) Un día después de la fecha de corte</div>
+</div>
+
+<div id="pregunta32" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿En qué escenarios podemos hacer liberación de parámetros? 
+<div id="respuestas32a" class="correcta">A) Aviso de viaje y para restablecimiento de parámetros.</div>
+<div id="respuestas32b" class="incorrecta">B) Por seguridad, nunca es posible liberar parámetros</div>
+<div id="respuestas32c" class="incorrecta">C) En caso de robo o extravío</div>
+</div>
+
+<div id="pregunta33" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿Cuáles son los únicos tres motivos de cancelación de una tarjeta de créditode manera definitiva en horario nocturno? 
+<div id="respuestas33a" class="correcta">A) Cliente reside en el extranjero, cliente con edad igual o mayor a 75 años y cuentas depuradas</div>
+<div id="respuestas33b" class="incorrecta">B) Cliente reside en extranjero, cliente con 65 años de edad o más y cuentas clonadas</div>
+<div id="respuestas33c" class="incorrecta">C) Cliente fallecido, cliente con 75 años de edad y cuentas depuradas</div>
+</div>
+
+<div id="pregunta34" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿Qué significa el bloqueo “K” en una cuenta de tarjeta de crédito? 
+<div id="respuestas34a" class="correcta">A) Que la cuenta de la tarjeta de crédito está cancelada de manera definitiva.</div>
+<div id="respuestas34b" class="incorrecta">B) Cuenta con adeudo.</div>
+<div id="respuestas34c" class="incorrecta">C) Precancelación.</div>
+</div>
+
+<div id="pregunta35" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿Cuál es la mascarilla en la que puedes validar si el cliente cuenta con alguna promoción como: incremento de línea, Ya bájale, cheque de conveniencia y línea adicional?
+<div id="respuestas35a" class="incorrecta">A) En el buscador de tu preferencia</div>
+<div id="respuestas35b" class="correcta">B) Buscador de promociones</div>
+<div id="respuestas35c" class="incorrecta">C) Buró de crédito</div>
+</div>
+
+<div id="pregunta36" class="preguntas centrar"><div class="cerrar">&times;</div>
+En el campo TXN en el software Vision, ¿cuáles códigos corresponden a un cargo nacional?
+<div id="respuestas36a" class="correcta">A) D0001</div>
+<div id="respuestas36b" class="incorrecta">B) D0043</div>
+<div id="respuestas36c" class="incorrecta">C) D0042</div>
+</div>
+
+<div id="pregunta37" class="preguntas centrar"><div class="cerrar">&times;</div>
+¿Qué pantallas sirven como apoyo para dar de alta una aclaración de un movimiento antes y después del corte?
+<div id="respuestas37a" class="incorrecta">A) AZTV y ARQB</div>
+<div id="respuestas37b" class="correcta">B) ARSD y ARTD</div>
+<div id="respuestas37c" class="incorrecta">C) ARSD y ARIQ</div>
+</div>
+
+<div id="pregunta38" class="preguntas centrar"><div class="cerrar">&times;</div>
+La srita. Ana se comunica porque el día martes realizó un pago de $3,000. 00 pesos de un examen clínico y desea que la cantidad pagada sea diferida a meses sin intereses. La tarjeta con la que pagó es Mujer Banorte. ¿Qué proceso debe hacerse antes de diferir su compra?
+<div id="respuestas38a" class="incorrecta">A) No es posible diferir una compra ya hecha a meses sin intereses, la clienta debío solicitarlo al momento de hacer la compra. </div>
+<div id="respuestas38b" class="correcta">B) Verificar que la promoción esté vigente, que la cantidad a diferir sea la correcta, que la compra esté en firme, que la promoción aplique para la tarjeta.</div>
+<div id="respuestas38c" class="incorrecta">C) Verificar que la persona quien llama sea realmente la que dice ser, preguntando sus datos que proporcionó al solicitar la tarjeta de crédito. </div>
+</div>
+
+<div id="pregunta39" class="preguntas centrar"><div class="cerrar">&times;</div>
+El señor Juan Montes acudió a una sucursal a solicitar un crédito hipotecario; sin embargo, el ejecutivo de servicio le comenta que tiene un saldo pendiente de una tarjeta de crédito. El señor Juan, muy molesto llama a Banortel y expresa que nunca solicitó ni tramitó ninguna tarjeta de crédito. ¿Qué que se debe hacer para darle una solución al cliente? 
+<div id="respuestas39a" class="correcta">A) Solicitud de aclaración, productos o servicios no reconocidos PORI</div>
+<div id="respuestas39b" class="incorrecta">B) Denunciar ante la PGR el robo de datos. </div>
+<div id="respuestas39c" class="incorrecta">C) Remitir al cliente al Buró de Crédito </div>
+</div>
+<!--
+<div id='pregunta1' class='preguntas centrar'>
+    pregunta1
+    <div id='respuestas1a' class='correcta'>respuestas1a</div>
+    <div id='respuestas1b' class='incorrecta'>respuestas1b</div>
+    <div id='respuestas1c' class='incorrecta'>respuestas1c</div>
+</div>
+<div id='pregunta2' class='preguntas centrar'>
+    pregunta2
+    <div id='respuestas2a' class='correcta'>respuestas2a</div>
+    <div id='respuestas2b' class='incorrecta'>respuestas2b</div>
+    <div id='respuestas2c' class='incorrecta'>respuestas2c</div>
+</div>
+<div id='pregunta3' class='preguntas centrar'>
+    pregunta3
+    <div id='respuestas3a' class='correcta'>respuestas3a</div>
+    <div id='respuestas3b' class='incorrecta'>respuestas3b</div>
+    <div id='respuestas3c' class='incorrecta'>respuestas3c</div>
+</div>
+<div id='pregunta4' class='preguntas centrar'>
+    pregunta4
+    <div id='respuestas4a' class='correcta'>respuestas4a</div>
+    <div id='respuestas4b' class='incorrecta'>respuestas4b</div>
+    <div id='respuestas4c' class='incorrecta'>respuestas4c</div>
+</div>
+<div id='pregunta5' class='preguntas centrar'>
+    pregunta5
+    <div id='respuestas5a' class='correcta'>respuestas5a</div>
+    <div id='respuestas5b' class='incorrecta'>respuestas5b</div>
+    <div id='respuestas5c' class='incorrecta'>respuestas5c</div>
+</div>
+<div id='pregunta6' class='preguntas centrar'>
+    pregunta6
+    <div id='respuestas6a' class='correcta'>respuestas6a</div>
+    <div id='respuestas6b' class='incorrecta'>respuestas6b</div>
+    <div id='respuestas6c' class='incorrecta'>respuestas6c</div>
+</div>
+<div id='pregunta7' class='preguntas centrar'>
+    pregunta7
+    <div id='respuestas7a' class='correcta'>respuestas7a</div>
+    <div id='respuestas7b' class='incorrecta'>respuestas7b</div>
+    <div id='respuestas7c' class='incorrecta'>respuestas7c</div>
+</div>
+<div id='pregunta8' class='preguntas centrar'>
+    pregunta8
+    <div id='respuestas8a' class='correcta'>respuestas8a</div>
+    <div id='respuestas8b' class='incorrecta'>respuestas8b</div>
+    <div id='respuestas8c' class='incorrecta'>respuestas8c</div>
+</div>
+<div id='pregunta9' class='preguntas centrar'>
+    pregunta9
+    <div id='respuestas9a' class='correcta'>respuestas9a</div>
+    <div id='respuestas9b' class='incorrecta'>respuestas9b</div>
+    <div id='respuestas9c' class='incorrecta'>respuestas9c</div>
+</div>
+<div id='pregunta10' class='preguntas centrar'>
+    pregunta10
+    <div id='respuestas10a' class='correcta'>respuestas10a</div>
+    <div id='respuestas10b' class='incorrecta'>respuestas10b</div>
+    <div id='respuestas10c' class='incorrecta'>respuestas10c</div>
+</div>
+<div id='pregunta11' class='preguntas centrar'>
+    pregunta11
+    <div id='respuestas11a' class='correcta'>respuestas11a</div>
+    <div id='respuestas11b' class='incorrecta'>respuestas11b</div>
+    <div id='respuestas11c' class='incorrecta'>respuestas11c</div>
+</div>
+<div id='pregunta12' class='preguntas centrar'>
+    pregunta12
+    <div id='respuestas12a' class='correcta'>respuestas12a</div>
+    <div id='respuestas12b' class='incorrecta'>respuestas12b</div>
+    <div id='respuestas12c' class='incorrecta'>respuestas12c</div>
+</div>
+<div id='pregunta13' class='preguntas centrar'>
+    pregunta13
+    <div id='respuestas13a' class='correcta'>respuestas13a</div>
+    <div id='respuestas13b' class='incorrecta'>respuestas13b</div>
+    <div id='respuestas13c' class='incorrecta'>respuestas13c</div>
+</div>
+<div id='pregunta14' class='preguntas centrar'>
+    pregunta14
+    <div id='respuestas14a' class='correcta'>respuestas14a</div>
+    <div id='respuestas14b' class='incorrecta'>respuestas14b</div>
+    <div id='respuestas14c' class='incorrecta'>respuestas14c</div>
+</div>
+<div id='pregunta15' class='preguntas centrar'>
+    pregunta15
+    <div id='respuestas15a' class='correcta'>respuestas15a</div>
+    <div id='respuestas15b' class='incorrecta'>respuestas15b</div>
+    <div id='respuestas15c' class='incorrecta'>respuestas15c</div>
+</div>
+<div id='pregunta16' class='preguntas centrar'>
+    pregunta16
+    <div id='respuestas16a' class='correcta'>respuestas16a</div>
+    <div id='respuestas16b' class='incorrecta'>respuestas16b</div>
+    <div id='respuestas16c' class='incorrecta'>respuestas16c</div>
+</div>
+<div id='pregunta17' class='preguntas centrar'>
+    pregunta17
+    <div id='respuestas17a' class='correcta'>respuestas17a</div>
+    <div id='respuestas17b' class='incorrecta'>respuestas17b</div>
+    <div id='respuestas17c' class='incorrecta'>respuestas17c</div>
+</div>
+<div id='pregunta18' class='preguntas centrar'>
+    pregunta18
+    <div id='respuestas18a' class='correcta'>respuestas18a</div>
+    <div id='respuestas18b' class='incorrecta'>respuestas18b</div>
+    <div id='respuestas18c' class='incorrecta'>respuestas18c</div>
+</div>
+<div id='pregunta19' class='preguntas centrar'>
+    pregunta19
+    <div id='respuestas19a' class='correcta'>respuestas19a</div>
+    <div id='respuestas19b' class='incorrecta'>respuestas19b</div>
+    <div id='respuestas19c' class='incorrecta'>respuestas19c</div>
+</div>
+<div id='pregunta20' class='preguntas centrar'>
+    pregunta20
+    <div id='respuestas20a' class='correcta'>respuestas20a</div>
+    <div id='respuestas20b' class='incorrecta'>respuestas20b</div>
+    <div id='respuestas20c' class='incorrecta'>respuestas20c</div>
+</div>
+<div id='pregunta21' class='preguntas centrar'>
+    pregunta21
+    <div id='respuestas21a' class='correcta'>respuestas21a</div>
+    <div id='respuestas21b' class='incorrecta'>respuestas21b</div>
+    <div id='respuestas21c' class='incorrecta'>respuestas21c</div>
+</div>
+<div id='pregunta22' class='preguntas centrar'>
+    pregunta22
+    <div id='respuestas22a' class='correcta'>respuestas22a</div>
+    <div id='respuestas22b' class='incorrecta'>respuestas22b</div>
+    <div id='respuestas22c' class='incorrecta'>respuestas22c</div>
+</div>
+<div id='pregunta23' class='preguntas centrar'>
+    pregunta23
+    <div id='respuestas23a' class='correcta'>respuestas23a</div>
+    <div id='respuestas23b' class='incorrecta'>respuestas23b</div>
+    <div id='respuestas23c' class='incorrecta'>respuestas23c</div>
+</div>
+<div id='pregunta24' class='preguntas centrar'>
+    pregunta24
+    <div id='respuestas24a' class='correcta'>respuestas24a</div>
+    <div id='respuestas24b' class='incorrecta'>respuestas24b</div>
+    <div id='respuestas24c' class='incorrecta'>respuestas24c</div>
+</div>
+<div id='pregunta25' class='preguntas centrar'>
+    pregunta25
+    <div id='respuestas25a' class='correcta'>respuestas25a</div>
+    <div id='respuestas25b' class='incorrecta'>respuestas25b</div>
+    <div id='respuestas25c' class='incorrecta'>respuestas25c</div>
+</div>
+<div id='pregunta26' class='preguntas centrar'>
+    pregunta26
+    <div id='respuestas26a' class='correcta'>respuestas26a</div>
+    <div id='respuestas26b' class='incorrecta'>respuestas26b</div>
+    <div id='respuestas26c' class='incorrecta'>respuestas26c</div>
+</div>
+<div id='pregunta27' class='preguntas centrar'>
+    pregunta27
+    <div id='respuestas27a' class='correcta'>respuestas27a</div>
+    <div id='respuestas27b' class='incorrecta'>respuestas27b</div>
+    <div id='respuestas27c' class='incorrecta'>respuestas27c</div>
+</div>
+<div id='pregunta28' class='preguntas centrar'>
+    pregunta28
+    <div id='respuestas28a' class='correcta'>respuestas28a</div>
+    <div id='respuestas28b' class='incorrecta'>respuestas28b</div>
+    <div id='respuestas28c' class='incorrecta'>respuestas28c</div>
+</div>
+<div id='pregunta29' class='preguntas centrar'>
+    pregunta29
+    <div id='respuestas29a' class='correcta'>respuestas29a</div>
+    <div id='respuestas29b' class='incorrecta'>respuestas29b</div>
+    <div id='respuestas29c' class='incorrecta'>respuestas29c</div>
+</div>
+<div id='pregunta30' class='preguntas centrar'>
+    pregunta30
+    <div id='respuestas30a' class='correcta'>respuestas30a</div>
+    <div id='respuestas30b' class='incorrecta'>respuestas30b</div>
+    <div id='respuestas30c' class='incorrecta'>respuestas30c</div>
+</div>
+<div id='pregunta31' class='preguntas centrar'>
+    pregunta31
+    <div id='respuestas31a' class='correcta'>respuestas31a</div>
+    <div id='respuestas31b' class='incorrecta'>respuestas31b</div>
+    <div id='respuestas31c' class='incorrecta'>respuestas31c</div>
+</div>
+<div id='pregunta32' class='preguntas centrar'>
+    pregunta32
+    <div id='respuestas32a' class='correcta'>respuestas32a</div>
+    <div id='respuestas32b' class='incorrecta'>respuestas32b</div>
+    <div id='respuestas32c' class='incorrecta'>respuestas32c</div>
+</div>
+<div id='pregunta33' class='preguntas centrar'>
+    pregunta33
+    <div id='respuestas33a' class='correcta'>respuestas33a</div>
+    <div id='respuestas33b' class='incorrecta'>respuestas33b</div>
+    <div id='respuestas33c' class='incorrecta'>respuestas33c</div>
+</div>
+<div id='pregunta34' class='preguntas centrar'>
+    pregunta34
+    <div id='respuestas34a' class='correcta'>respuestas34a</div>
+    <div id='respuestas34b' class='incorrecta'>respuestas34b</div>
+    <div id='respuestas34c' class='incorrecta'>respuestas34c</div>
+</div>
+<div id='pregunta35' class='preguntas centrar'>
+    pregunta35
+    <div id='respuestas35a' class='correcta'>respuestas35a</div>
+    <div id='respuestas35b' class='incorrecta'>respuestas35b</div>
+    <div id='respuestas35c' class='incorrecta'>respuestas35c</div>
+</div>
+<div id='pregunta36' class='preguntas centrar'>
+    pregunta36
+    <div id='respuestas36a' class='correcta'>respuestas36a</div>
+    <div id='respuestas36b' class='incorrecta'>respuestas36b</div>
+    <div id='respuestas36c' class='incorrecta'>respuestas36c</div>
+</div>
+<div id='pregunta37' class='preguntas centrar'>
+    pregunta37
+    <div id='respuestas37a' class='correcta'>respuestas37a</div>
+    <div id='respuestas37b' class='incorrecta'>respuestas37b</div>
+    <div id='respuestas37c' class='incorrecta'>respuestas37c</div>
+</div>
+<div id='pregunta38' class='preguntas centrar'>
+    pregunta38
+    <div id='respuestas38a' class='correcta'>respuestas38a</div>
+    <div id='respuestas38b' class='incorrecta'>respuestas38b</div>
+    <div id='respuestas38c' class='incorrecta'>respuestas38c</div>
+</div>
+<div id='pregunta39' class='preguntas centrar'>
+    pregunta39
+    <div id='respuestas39a' class='correcta'>respuestas39a</div>
+    <div id='respuestas39b' class='incorrecta'>respuestas39b</div>
+    <div id='respuestas39c' class='incorrecta'>respuestas39c</div>
+</div>
+-->
+</div>
+</body>
+</html>
+<script type="text/javascript" src="funciones.js"></script>

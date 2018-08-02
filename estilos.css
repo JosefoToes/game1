@@ -1,0 +1,477 @@
+*{
+    font-family: 'Source Sans Pro', 'Arial', 'sans-serif';
+    font-weight: 100;
+}
+body{
+    user-select: none;
+    overflow: hidden;
+}
+.elintro{
+    font-family: 'League Gothic Italic';
+    color: #0000005e;
+    text-align: center;
+    margin-top: 100px;
+    font-size: 7vw;
+}.elopcione{
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+    height: 45px;
+    border: 3px solid #0000005e;
+    font-size: 35px;
+    cursor: pointer;
+    margin: 25px;
+    padding: 10px;
+    border-radius: 50px;
+}
+.centrar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; 
+    margin: auto;
+}
+#contentall{
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(#fefefe,#717796);
+}
+#floor{
+    perspective: 370px;
+}
+#floorimage{
+    background: radial-gradient(#4b5265, #74868a80, #817ea000,  #00000000);
+    transform: rotate3d(-50,0,0,100deg) translateY(-36%);
+}
+#tocaturno{
+    width: 210px;
+    height: 5%;
+    z-index: 0;
+    background: linear-gradient(15deg, #b1afaf6e,#00000085);
+    border: 5px solid #333;
+    border-radius: 10px;
+    padding: 2%;
+    border-top-color: #666;
+    border-right-color: #666;
+    color: #ccc;
+    font-size: 20px;
+    text-shadow: -1px -1px 0 #333;
+    text-align: center;
+    top: 0;
+    bottom: 80%;
+}
+#tocaturnocolor{
+}
+#instrucciones{
+    width: 70%;
+    height: auto;
+    padding: 2% 15% 45%;
+    margin: auto;
+    background: linear-gradient(#3f484e,#75a2c300);
+    color: #fff;
+    text-align: center;
+    font-size: 1.6vw;
+    text-shadow: -1px -1px 0 #aaa;
+}
+.preguntas{
+    width: 50%;
+    height: 40%;
+    padding: 60px 50px;
+    background: linear-gradient(#cbcbcb,#eee);
+    display: none;
+    font-size: 2.5vw;
+    font-weight: bold;
+    color: #333;
+    user-select: none;
+    z-index: 9;
+    border: 2px solid #c1b3b7;
+    border-top: 2px solid #fff;
+    border-radius: 8px;
+    text-shadow: 1px 1px 0 #ffffffa6;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    overflow-y: scroll;
+}
+#tarjetas{
+    display: none;
+    width: 100%;
+    height: 70%;
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    z-index: 10;
+    background: linear-gradient(#3c3e4c, #8c8d96eb, #8a8a8a00);
+    padding-bottom: 60%;
+    top: 50%;
+    box-shadow: -31px 19px 20px -170px #000;
+    overflow: hidden;
+}
+.cerrar{
+    display: none;
+    position: absolute;
+    font-size: 40px;
+    top: 0;
+    right: 10px;
+    cursor: pointer;
+    color: #666;
+}
+.correcta{
+    padding: 15px 0 5px 0;
+    border-bottom: 1px solid #aaa;
+    cursor: pointer;
+    margin-bottom: 5px;
+    font-size: 1.5vw;
+    font-weight: 100;
+    color: #555;
+    text-shadow: none;
+}
+.incorrecta{
+    padding: 15px 0 5px 0;
+    border-bottom: 1px solid #aaa;
+    cursor: pointer;
+    margin-bottom: 5px;
+    font-size: 1.5vw;
+    font-weight: 100;
+    color: #555;
+    text-shadow: none;
+}
+#eltimer{
+    text-align: center;
+    width: 150px;
+    height: 20%;
+    bottom: 75%;
+    background: linear-gradient(#3a3a3a,#636363);
+    display: none;
+    z-index: 8;
+    border: 2px solid #524347;
+    border-top: 2px solid #c1b3b7;
+    border-radius: 10px;
+}
+#eltimer span{
+    font-size: 52px;
+    color: #e5243c;
+    font-weight: bold;
+    text-shadow: 0 0 10px #e5243c4d, -1px -1px 0 #272727;
+}
+.equipos{
+    text-align: center;
+    width: 24%;
+    height: auto;
+    color: #aaa;
+    padding: 20px 0 0 0;
+    background: linear-gradient(#3a3a3a,#523f5a59);
+    text-shadow: 1px 1px 0 #fff;
+    border-bottom: 5px solid #444;
+    box-shadow: 0 0 10px 3px #00000021;
+    min-width: 125px;
+    min-height: 220px;
+    position: absolute;
+    margin: auto;
+}
+.maz{
+    background: linear-gradient(-150deg, #2773a9,#3088c5);
+    color: #ceecff !important;
+}
+.mrj{
+    background: linear-gradient(-130deg, hsla(343, 60%, 40%, 1),#cd3c4d);
+    color: #ffd4ac !important;
+}
+.myw{
+    background: linear-gradient(-150deg, #e0ab15,#dcd73c);
+    color: #6b5c1e !important;
+    text-shadow: 1px 1px 0 #ffffff5e !important;
+}
+.mvd{
+    background: linear-gradient(-130deg, #18864e,#5e9a66);
+    color: #d2fbba !important;
+}
+.marcador{
+    font-family: 'League Gothic Italic';
+    font-size: 2.4vw;
+    cursor: pointer;
+    width: 30%;
+    display: inline-block;
+    padding: 10% 2% 10% 0%;
+    margin: 1px 0;
+    border-radius: 1px;
+    color: #e7ec34;
+    text-shadow: -1px -1px 0 #00000047, 0 0 20px #ffffdc59;
+    border: 2px solid #ffffff33;
+    border-width: 2px 0 2px 0;
+}
+#contequipos{
+    perspective: 600px;
+}
+#eqazul{
+    top: 20%;
+    left: 27.2%;
+    /* border-left: 10px solid #6bb348; */
+    transform: rotateY(10deg) translate3d(0px,0px,-90px);
+}
+#eqrojo{
+    top: 20%;
+    left: 3%;
+    /* border-left: 10px solid #d84949; */
+    transform: rotateY(30deg);
+}
+#eqamarillo{
+    top: 20%;
+    right: 27.2%;
+    /* border-right: 10px solid #efd240; */
+    /* background: #808080; */
+    transform: rotateY(-10deg) translate3d(0px,0px,-90px);
+}
+#eqverde{
+    top: 20%;
+    right: 3%;
+    /* border-right: 10px solid #3e72d4; */
+    transform: rotateY(-30deg);
+}
+#blockeo{
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#00000036,#656565d1);
+    z-index: 8;
+}
+#scoreazul{
+    color: #3e72d4;
+
+}
+#scorerojo{
+    color: #d84949;
+
+}
+#scoreamarillo{
+    color: #f0a000;
+}
+#scoreverde{
+    color: #6bb348;
+}
+.scores{
+    position: absolute;
+    background: linear-gradient(#bbbbbb,#ffffff);
+    font-family: 'League Gothic';
+    font-size: 30px;
+    padding: 10px 0 12px;
+    width: 99%;
+    left: 0;
+    top: 0;
+    border-radius: 4px 4px 0 0;
+    margin-top: -2px;
+    border: 1px solid #aaa;
+    border-top: 1px solid #fff;
+}
+.yafue{
+    opacity: 0.2;
+    user-select:none;
+    cursor: default;
+}
+.bloqueos{
+    position: absolute;
+    margin: auto;
+    height: 65%;
+    z-index: 9;
+    user-select: none;
+    cursor: default;
+    opacity: 0;
+}
+#blockeorojo{
+    display: none;
+    background: rgba(255, 0, 0, 0.1);
+    width: 28%;
+    left: 0%;
+    top: 5%;
+}
+#blockeoazul{
+    background: rgba(0, 14, 255, 0.1);
+    width: 22%;
+    left: 28%;
+    top: 5%;
+}
+#blockeoamarillo{
+    background: rgba(222, 255, 0, 0.1);
+    width: 22%;
+    right: 28%;
+    top: 5%;
+}
+#blockeoverde{
+    background: rgba(10, 255, 0, 0.1);
+    width: 28%;
+    right: 0%;
+    top: 5%;
+}
+#feedbackbuena{
+    width: 520px;
+    height: 140px;
+    background: #2bd8a1;
+    text-align: center;
+    padding-top: 100px;
+    color: #fff;
+    font-size: 24px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    display: none;
+    z-index: 20;
+}
+#feedbackmala{
+    width: 520px;
+    height: 140px;
+    background: #e47755;
+    text-align: center;
+    padding-top: 100px;
+    color: #fff;
+    font-size: 24px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    display: none;
+    z-index: 20;
+}
+.cards{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    width: 40%;
+    height: 40%;
+    transform: rotate3d(100,70,70,280deg) translate3d(0px,50px,230px);
+}
+.card1{
+    background-color: rgba(255, 255, 0, 0);
+    background-image: url(img/card1.png);
+    animation-name: danceCalloutsfour;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    margin-top: 60px;
+}
+.card2{
+    background-color: rgba(255, 0, 255, 0);
+    background-image: url(img/card2.png);
+    animation-name: danceCalloutsthree;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    margin-top: 40px;
+}
+.card3{
+    background-color: rgba(0, 255, 255, 0);
+    background-image: url(img/card1.png);
+    animation-name: danceCalloutstwo;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    margin-top: 20px;
+}
+.card4{
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url(img/card2.png);
+    animation-name: danceCalloutsone;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    margin-top: 0;
+}
+.cardshadow{
+    -webkit-filter: blur(15px);
+    -moz-filter: blur(15px);
+    -o-filter: blur(15px);
+    -ms-filter: blur(15px);
+    filter: blur(15px);
+    width: 40%;
+    height: 40%;
+    background-color: rgba(0, 0, 0, 0.15);
+    margin: 22% 25%;
+    transform: rotate3d(100,70,70,280deg) translate3d(0px,80px,80px);
+}
+@keyframes danceCalloutsone {
+    0% {top: 0vh;}
+    5% {top: -5vh;}
+    10% {top: 0vh;}
+    15% {top: -5vh;}
+    20% {top: 0vh;}
+    100% {top: 0vh;}
+}
+@keyframes danceCalloutstwo {
+    2% {top: 0vh;}
+    7% {top: -5vh;}
+    12% {top: 0vh;}
+    17% {top: -5vh;}
+    22% {top: 0vh;}
+    100% {top: 0vh;}
+}
+@keyframes danceCalloutsthree {
+    4% {top: 0vh;}
+    9% {top: -5vh;}
+    14% {top: 0vh;}
+    19% {top: -5vh;}
+    24% {top: 0vh;}
+    100% {top: 0vh;}
+}
+@keyframes danceCalloutsfour {
+    6% {top: 0vh;}
+    11% {top: -5vh;}
+    16% {top: 0vh;}
+    21% {top: -5vh;}
+    26% {top: 0vh;}
+    100% {top: 0vh;}
+}
+#inicio1{
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(#fefefe,#f2fffe);   
+    z-index: 45;
+    text-align: center;
+}
+#inicio1 h3{
+    width: 50%;
+    height: auto;
+    padding: 5% 25% 35%;
+    margin: auto;
+    background: linear-gradient(#9ca9b3,#75a2c300);
+    color: #fff;
+    text-align: center;
+    font-size: 2vw;
+    text-shadow: -1px -1px 0 #aaa;
+}
+#aceptar1{
+    padding: 10px 15px;
+    background: #ff9715;
+    border-radius: 5px;
+    border-bottom: 2px solid rgba(0,0,0,0.3);
+    border-top: 2px solid rgba(255,255,255,0.3);
+    cursor: pointer;
+    text-align: center;
+    width: 120px;
+    height: 25px;
+    color: #fff;
+    text-shadow: -1px -1px 0 rgba(0,0,0,0.15);
+    font-size: 1.6vw;   
+}
+#instructionses{
+    border-radius: 50px;
+    width: 100%;
+    height: 0%;
+    z-index: 50;
+    font-size: 1.2vw;
+    top: 90%;
+}
+#question{
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    left: 95%;
+    top: 90%;
+    border: 2px solid #fff;
+    color: #fff;
+    text-align: center;
+    font-size: 2.3vw;
+    font-weight: bold;
+    cursor: pointer;
+}
+#textinst{
+    display: none;
+    border-radius: 10px;
+    width: 25%;
+    height: 180px;
+    padding: 20px;
+    left: 60%;
+    top: 0%;
+    border: 2px solid #fff;
+    color: #fff;
+    background: #707b8ab5;
+}
